@@ -1,0 +1,26 @@
+module tb_autocorrelation_control ();
+    reg clk;
+    reg [3:0] wsel;
+    wire [63:0] mask;
+
+    // Clock generation
+    always #5 clk = ~clk; // Assuming 10ns clock period
+
+    assign mask = {{16{wsel}}};
+
+    // Stimulus generation
+    initial begin
+      clk = 1;
+      // Initialize input signals if needed
+      #11;
+
+      // Provide test vectors
+      // Change input values here
+
+      #1000; // Simulation duration
+
+      $finish; // End the simulation
+
+    end
+
+endmodule
