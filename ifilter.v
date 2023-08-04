@@ -3,10 +3,10 @@ module ifilter (
         output  wire ready,
 
         output  wire [9:0] a_rsel,
-        output  wire [31:0] a_r,
+        input  wire [31:0] a_r,
 
         output  wire [7:0] x_raddr,
-        output  wire [15:0] x_r,
+        input  wire [15:0] x_r,
 
         output  wire [7:0] residue_waddr,
         output  wire residue_wen,
