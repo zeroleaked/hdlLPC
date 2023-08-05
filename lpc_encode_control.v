@@ -3,7 +3,8 @@ module lpc_encode_control (
         input   wire start,
         input   wire ready_autocorrelation, ready_levinson, ready_ifilter,
         output  reg reset_levinson, reset_ifilter,
-        output  reg a_rsel_sel, x_raddr_sel
+        output  reg [1:0] a_rsel_sel,
+        output  reg x_raddr_sel
     );
 
     reg [2:0] current_state, next_state;
@@ -69,37 +70,37 @@ module lpc_encode_control (
             S_0: begin
                 reset_levinson          = 1'b0;
                 reset_ifilter           = 1'b0;
-                a_rsel_sel              = 1'bx;
+                a_rsel_sel              = 2'h2;
                 x_raddr_sel             = 1'bx;
             end
             S_1: begin
                 reset_levinson          = 1'b0;
                 reset_ifilter           = 1'b0;
-                a_rsel_sel              = 1'bx;
+                a_rsel_sel              = 2'hx;
                 x_raddr_sel             = 1'b0;
             end
             S_2: begin
                 reset_levinson          = 1'b1;
                 reset_ifilter           = 1'b0;
-                a_rsel_sel              = 1'b0;
+                a_rsel_sel              = 2'h0;
                 x_raddr_sel             = 1'bx;
             end
             S_3: begin
                 reset_levinson          = 1'b0;
                 reset_ifilter           = 1'b0;
-                a_rsel_sel              = 1'b0;
+                a_rsel_sel              = 2'h0;
                 x_raddr_sel             = 1'bx;
             end
             S_4: begin
                 reset_levinson          = 1'b0;
                 reset_ifilter           = 1'b1;
-                a_rsel_sel              = 1'b1;
+                a_rsel_sel              = 2'h1;
                 x_raddr_sel             = 1'b1;
             end
             S_5: begin
                 reset_levinson          = 1'b0;
                 reset_ifilter           = 1'b0;
-                a_rsel_sel              = 1'b1;
+                a_rsel_sel              = 2'h1;
                 x_raddr_sel             = 1'b1;
             end
         endcase

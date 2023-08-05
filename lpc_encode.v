@@ -5,7 +5,9 @@ module lpc_encode (
         input   wire [7:0] x_waddr,
         input   wire [15:0] x_din,
         input   wire [7:0] residue_raddr,
-        output  wire [15:0] residue_dout
+        output  wire [15:0] residue_dout,
+        input   wire [9:0] a_rsel,
+        output   wire [31:0] a_dout
     );
 
     wire [7:0] x_raddr;
@@ -37,15 +39,14 @@ module lpc_encode (
 
     wire [9:0] a_wsel;
     wire [31:0] a_din;
-    wire [9:0] a_rsel;
-    wire [31:0] a_dout;
+    wire [9:0] int_a_rsel;
 
     register_32x10 register_a (
         .clk(clk),
         .reset(reset),
         .wsel(a_wsel),
         .din(a_din),
-        .rsel(a_rsel),
+        .rsel(int_a_rsel),
         .dout(a_dout)
     );
 
@@ -109,8 +110,8 @@ module lpc_encode (
     );
 
 
-    wire a_rsel_sel;
-    assign a_rsel = a_rsel_sel ? a_rsel_ifilter : a_rsel_levinson;
+    wire [1:0] a_rsel_sel;
+    assign int_a_rsel = a_rsel_sel == 2'h0 ? a_rsel_levinson : a_rsel_sel == 2'h1 ? a_rsel_ifilter : a_rsel;
 
     wire x_raddr_sel;
     assign x_raddr = x_raddr_sel ? x_raddr_ifilter : x_raddr_autocorrelation;
