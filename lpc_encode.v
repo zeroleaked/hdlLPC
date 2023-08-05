@@ -1,11 +1,16 @@
 module lpc_encode (
         input   wire clk, reset, start,
 
+        // audio in write channel
         input   wire x_wen,
         input   wire [7:0] x_waddr,
         input   wire [15:0] x_din,
+
+        // lpc residue read channel
         input   wire [7:0] residue_raddr,
         output  wire [15:0] residue_dout,
+
+        // lpc coefficient read channel
         input   wire [9:0] a_rsel,
         output   wire [31:0] a_dout
     );
