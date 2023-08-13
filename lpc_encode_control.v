@@ -1,6 +1,6 @@
 module lpc_encode_control (
         input   wire clk, reset,
-        input   wire start, rfin,
+        input   wire start,
         input   wire ready_autocorrelation, ready_levinson, ready_ifilter,
         output  reg rready,
         output  reg reset_levinson, reset_ifilter,
@@ -63,11 +63,7 @@ module lpc_encode_control (
                 end
             end
             S_6: begin // external read only
-                if (rfin) begin
-                    next_state = S_0;
-                end else begin
-                    next_state = S_6;
-                end
+                next_state = S_6;
             end
             default: next_state = S_0;
         endcase

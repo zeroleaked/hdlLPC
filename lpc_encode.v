@@ -1,5 +1,5 @@
 module lpc_encode (
-        input   wire clk, reset, start, rfin,
+        input   wire clk, reset, start,
         output  wire rready,
 
         // audio in write channel
@@ -133,8 +133,7 @@ module lpc_encode (
         .reset_ifilter(reset_ifilter),
         .a_rsel_sel(a_rsel_sel),
         .x_raddr_sel(x_raddr_sel),
-        .rready(rready),
-        .rfin(rfin)
+        .rready(rready)
     );
 
 
