@@ -23,22 +23,22 @@ module ifilter_control (
             if (counter_160 == 159)
                 ready = 1;
             else
-                counter_160 <= counter_160 + 1;
+                counter_160 <= counter_160 + 8'd1;
         end
         else
             if (counter_160 == counter_11) begin
                 counter_11 <= 0;
-                counter_160 <= counter_160 + 1;
+                counter_160 <= counter_160 + 8'd1;
             end
             else
-                counter_11 <= counter_11 + 1;
+                counter_11 <= counter_11 + 4'd1;
 	end
 
     assign next_sample = counter_11 == 0;
-    assign a_rsel = counter_11 == 0 ? 10'hxxx : 1 << (counter_11-1);
+    assign a_rsel = counter_11 == 0 ? 10'hxxx : 10'd1 << (counter_11-1'd1);
     assign x_raddr = counter_160 - counter_11;
     assign residue_waddr = counter_160;
-    assign residue_wen = ready ? 0 : (counter_160 == counter_11) || (counter_11 == 10) ? 1 : 0;
+    assign residue_wen = ready ? 0 : (counter_160 == counter_11) || (counter_11 == 10) ? 1'b1 : 1'b0;
 
 
 endmodule

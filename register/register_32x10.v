@@ -10,7 +10,7 @@ module register_32x10 (
 
     always @(posedge clk) begin
         if (reset)
-            register <= 351'h0; // Reset the register to all zeros
+            register <= 320'h0; // Reset the register to all zeros
         else begin
             case(wsel)
                 10'h001: register[0 +: 32] <= din;

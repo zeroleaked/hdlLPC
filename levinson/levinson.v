@@ -7,12 +7,13 @@ module levinson (
         input   wire [9:0] a_rsel,
         input   wire [31:0] a_r,
 
-        input   wire [10:0] r_rsel,
+        output   wire [10:0] r_rsel,
         input   wire [31:0] r_r
     );
 
     wire [8:0] temp_sel;
     wire e_load, k_load, q_load;
+    wire out_sel, e_sel, q_sel;
     levinson_control levinson_control_0 (
         .clk(clk),
         .reset(reset),

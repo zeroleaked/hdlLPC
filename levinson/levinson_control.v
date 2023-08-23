@@ -131,7 +131,7 @@ module levinson_control (
                 int_ready       = 1'b0;
             end
             S_1: begin
-                int_r_rsel      = 1 << (i + 1);
+                int_r_rsel      = 11'b1 << (i + 1'd1);
                 int_a_rsel      = 10'hx;
                 int_a_wsel      = 10'h0;
                 int_temp_sel    = 9'hx;
@@ -144,8 +144,8 @@ module levinson_control (
                 int_ready       = 1'b0;
             end
             S_2: begin
-                int_r_rsel      = 1 << j;
-                int_a_rsel      = 1 << (i-j);
+                int_r_rsel      = 11'b1 << j;
+                int_a_rsel      = 10'b1 << (i-j);
                 int_a_wsel      = 10'h0;
                 int_temp_sel    = 9'hx;
                 int_out_sel     = 1'bx;
@@ -171,9 +171,9 @@ module levinson_control (
             end
             S_4: begin
                 int_r_rsel      = 11'hx;
-                int_a_rsel      = 1 << (j-1);
+                int_a_rsel      = 10'b1 << (j-1);
                 int_a_wsel      = 10'h0;
-                int_temp_sel    = 1 << (i-j);
+                int_temp_sel    = 9'b1 << (i-j);
                 int_out_sel     = 1'bx;
                 int_e_sel       = 1'bx;
                 int_q_sel       = 1'bx;
@@ -185,7 +185,7 @@ module levinson_control (
             S_5: begin
                 int_r_rsel      = 11'hx;
                 int_a_rsel      = 10'hx;
-                int_a_wsel      = 1 << i;
+                int_a_wsel      = 10'b1 << i;
                 int_temp_sel    = 9'hx;
                 int_out_sel     = 1'b0;
                 int_e_sel       = 1'b1;
@@ -197,9 +197,9 @@ module levinson_control (
             end
             S_6: begin
                 int_r_rsel      = 11'hx;
-                int_a_rsel      = 1 << j;
-                int_a_wsel      = 1 << j;
-                int_temp_sel    = 1 << j;
+                int_a_rsel      = 10'b1 << j;
+                int_a_wsel      = 10'b1 << j;
+                int_temp_sel    = 9'b1 << j;
                 int_out_sel     = 1'b1;
                 int_e_sel       = 1'bx;
                 int_q_sel       = 1'bx;
@@ -247,22 +247,22 @@ module levinson_control (
                 j <= i;
             end
             S_2: begin
-                j <= j-1;
+                j <= j-4'd1;
             end
             S_3: begin
                 j <= i;
             end
             S_4: begin
-                j <= j-1;
+                j <= j-4'd1;
             end
             S_5: begin
-                j <= i-1;
+                j <= i-4'd1;
             end
             S_6: begin
-                j <= j-1;
+                j <= j-4'd1;
             end
             S_7: begin
-                i <= i+1;
+                i <= i+4'd1;
             end
         endcase
     end

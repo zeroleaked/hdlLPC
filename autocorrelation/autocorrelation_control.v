@@ -21,13 +21,13 @@ module autocorrelation_control (
             counter_11 <= {counter_11[9:0], 1'b0};
         end
         else
-            counter_160 <= counter_160 + 1;
+            counter_160 <= counter_160 + 1'd1;
 	end
 
     assign next_lag = (counter_160 == 159) || reset;
     assign raddr = counter_160;
     assign lag = counter_11;
-    assign wsel = (counter_160 == 159) ? counter_11 : 0;
+    assign wsel = (counter_160 == 159) ? counter_11 : 1'b0;
     assign ready = counter_11 == 0;
 
 endmodule
