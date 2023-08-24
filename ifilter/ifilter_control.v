@@ -38,7 +38,7 @@ module ifilter_control (
     assign a_rsel = counter_11 == 0 ? 10'hxxx : 10'd1 << (counter_11-1'd1);
     assign x_raddr = counter_160 - counter_11;
     assign residue_waddr = counter_160;
-    assign residue_wen = ready ? 0 : (counter_160 == counter_11) || (counter_11 == 10) ? 1'b1 : 1'b0;
+    assign residue_wen = ready ? 1'b0 : (counter_160 == counter_11) || (counter_11 == 10) ? 1'b1 : 1'b0;
 
 
 endmodule
