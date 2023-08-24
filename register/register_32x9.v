@@ -37,6 +37,7 @@ module register_32x9 (
             9'h040: dout <= register[192 +: 32];
             9'h080: dout <= register[224 +: 32];
             9'h100: dout <= register[256 +: 32];
+            default: dout = 32'hxxxxxxxx;
         endcase
     end
 

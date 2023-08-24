@@ -32,7 +32,8 @@ module autocorrelation_mad (
     assign accum_t = accum_s + s_accumulate[31];
     assign accum_36 = accum_t + product;
     assign nacc_o = accum_36 - accum_36[35];
-    assign nacc_s = nacc_o >>> 4;
+    wire signed [35:0] nacc_s1 = nacc_o >>> 4; 
+    assign nacc_s = nacc_s1[31:0];
     assign accumulate = nacc_s + accum_36[35];
 
 

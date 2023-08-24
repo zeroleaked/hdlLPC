@@ -9,7 +9,8 @@ module levinson_k (
 
     wire signed [31:0] div;
     wire signed [32:0] e_signed = {{1'b0}, e[31:0]};
-    assign div = q_extend/e_signed; // a * 2^(-33) / (b * 2^(-34)) = a/b * 2^(1) = a/b * 2^(32) * 2^(-31)
+    wire signed [63:0] div1 = q_extend/e_signed;
+    assign div = div1[31:0]; // a * 2^(-33) / (b * 2^(-34)) = a/b * 2^(1) = a/b * 2^(32) * 2^(-31)
 
     assign next_k = -1 * div;
 
