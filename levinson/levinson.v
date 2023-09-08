@@ -4,7 +4,7 @@ module levinson (
 
         output  wire [9:0] a_wsel,
         output  wire [31:0] a_w,
-        input   wire [9:0] a_rsel,
+        output   wire [9:0] a_rsel,
         input   wire [31:0] a_r,
 
         output   wire [10:0] r_rsel,
@@ -66,6 +66,7 @@ module levinson (
 
     wire [31:0] next_k;
     levinson_k calc_k (
+        .clk(clk),
         .e(e),
         .q(q),
         .next_k(next_k)

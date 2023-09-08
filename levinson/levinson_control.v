@@ -17,17 +17,25 @@ module levinson_control (
 
     // FSM
 
-    reg [3:0] current_state, next_state;
+    reg [4:0] current_state, next_state;
 
-    localparam S_0      = 4'h0;
-    localparam S_1      = 4'h1;
-    localparam S_2      = 4'h2;
-    localparam S_3      = 4'h3;
-    localparam S_4      = 4'h4;
-    localparam S_5      = 4'h5;
-    localparam S_6      = 4'h6;
-    localparam S_7      = 4'h7;
-    localparam S_8      = 4'h8;
+    localparam S_0      = 5'h0;
+    localparam S_1      = 5'h1;
+    localparam S_2      = 5'h2;
+    localparam S_3      = 5'h3;
+    localparam S_3_1     = 5'h9;
+    localparam S_3_2     = 5'ha;
+    localparam S_3_3     = 5'hb;
+    localparam S_3_4     = 5'hc;
+    localparam S_3_5     = 5'hd;
+    localparam S_3_6     = 5'he;
+    localparam S_3_7     = 5'hf;
+    localparam S_3_8     = 5'h10;
+    localparam S_4      = 5'h4;
+    localparam S_5      = 5'h5;
+    localparam S_6      = 5'h6;
+    localparam S_7      = 5'h7;
+    localparam S_8      = 5'h8;
 
     always @(posedge clk) begin
         if (reset) begin
@@ -71,6 +79,30 @@ module levinson_control (
                 end
             end
             S_3: begin
+                next_state = S_3_1;
+            end
+            S_3_1: begin
+                next_state = S_3_2;
+            end
+            S_3_2: begin
+                next_state = S_3_3;
+            end
+            S_3_3: begin
+                next_state = S_3_4;
+            end
+            S_3_4: begin
+                next_state = S_3_5;
+            end
+            S_3_5: begin
+                next_state = S_3_6;
+            end
+            S_3_6: begin
+                next_state = S_3_7;
+            end
+            S_3_7: begin
+                next_state = S_3_8;
+            end
+            S_3_8: begin
                 if (i == 0) begin
                     next_state = S_5;
                 end else begin
@@ -164,6 +196,110 @@ module levinson_control (
                 int_out_sel     = 1'bx;
                 int_e_sel       = 1'bx;
                 int_q_sel       = 1'bx;
+                int_k_load      = 1'bx;
+                int_e_load      = 1'b0;
+                int_q_load      = 1'b0;
+                int_ready       = 1'b0;
+            end
+            S_3_1: begin
+                int_r_rsel      = 11'hx;
+                int_a_rsel      = 10'hx;
+                int_a_wsel      = 10'h0;
+                int_temp_sel    = 9'hx;
+                int_out_sel     = 1'bx;
+                int_e_sel       = 1'bx;
+                int_q_sel       = 1'bx;
+                int_k_load      = 1'bx;
+                int_e_load      = 1'b0;
+                int_q_load      = 1'b0;
+                int_ready       = 1'b0;
+            end
+            S_3_2: begin
+                int_r_rsel      = 11'hx;
+                int_a_rsel      = 10'hx;
+                int_a_wsel      = 10'h0;
+                int_temp_sel    = 9'hx;
+                int_out_sel     = 1'bx;
+                int_e_sel       = 1'bx;
+                int_q_sel       = 1'bx;
+                int_k_load      = 1'bx;
+                int_e_load      = 1'b0;
+                int_q_load      = 1'b0;
+                int_ready       = 1'b0;
+            end
+            S_3_3: begin
+                int_r_rsel      = 11'hx;
+                int_a_rsel      = 10'hx;
+                int_a_wsel      = 10'h0;
+                int_temp_sel    = 9'hx;
+                int_out_sel     = 1'bx;
+                int_e_sel       = 1'bx;
+                int_q_sel       = 1'bx;
+                int_k_load      = 1'bx;
+                int_e_load      = 1'b0;
+                int_q_load      = 1'b0;
+                int_ready       = 1'b0;
+            end
+            S_3_4: begin
+                int_r_rsel      = 11'hx;
+                int_a_rsel      = 10'hx;
+                int_a_wsel      = 10'h0;
+                int_temp_sel    = 9'hx;
+                int_out_sel     = 1'bx;
+                int_e_sel       = 1'bx;
+                int_q_sel       = 1'bx;
+                int_k_load      = 1'bx;
+                int_e_load      = 1'b0;
+                int_q_load      = 1'b0;
+                int_ready       = 1'b0;
+            end
+            S_3_5: begin
+                int_r_rsel      = 11'hx;
+                int_a_rsel      = 10'hx;
+                int_a_wsel      = 10'h0;
+                int_temp_sel    = 9'hx;
+                int_out_sel     = 1'bx;
+                int_e_sel       = 1'bx;
+                int_q_sel       = 1'bx;
+                int_k_load      = 1'bx;
+                int_e_load      = 1'b0;
+                int_q_load      = 1'b0;
+                int_ready       = 1'b0;
+            end
+            S_3_6: begin
+                int_r_rsel      = 11'hx;
+                int_a_rsel      = 10'hx;
+                int_a_wsel      = 10'h0;
+                int_temp_sel    = 9'hx;
+                int_out_sel     = 1'bx;
+                int_e_sel       = 1'bx;
+                int_q_sel       = 1'bx;
+                int_k_load      = 1'bx;
+                int_e_load      = 1'b0;
+                int_q_load      = 1'b0;
+                int_ready       = 1'b0;
+            end
+            S_3_7: begin
+                int_r_rsel      = 11'hx;
+                int_a_rsel      = 10'hx;
+                int_a_wsel      = 10'h0;
+                int_temp_sel    = 9'hx;
+                int_out_sel     = 1'bx;
+                int_e_sel       = 1'bx;
+                int_q_sel       = 1'bx;
+                int_k_load      = 1'bx;
+                int_e_load      = 1'b0;
+                int_q_load      = 1'b0;
+                int_ready       = 1'b0;
+            end
+            S_3_8: begin
+                int_r_rsel      = 11'hx;
+                int_a_rsel      = 10'hx;
+                int_a_wsel      = 10'h0;
+                int_temp_sel    = 9'hx;
+                int_out_sel     = 1'bx;
+                int_e_sel       = 1'bx;
+                int_q_sel       = 1'bx;
                 int_k_load      = 1'b1;
                 int_e_load      = 1'b0;
                 int_q_load      = 1'b0;
@@ -190,7 +326,7 @@ module levinson_control (
                 int_out_sel     = 1'b0;
                 int_e_sel       = 1'b1;
                 int_q_sel       = 1'bx;
-                int_k_load      = 1'bx;
+                int_k_load      = 1'b0;
                 int_e_load      = 1'b1;
                 int_q_load      = 1'bx;
                 int_ready       = 1'b0;
@@ -249,7 +385,7 @@ module levinson_control (
             S_2: begin
                 j <= j-4'd1;
             end
-            S_3: begin
+            S_3_8: begin
                 j <= i;
             end
             S_4: begin

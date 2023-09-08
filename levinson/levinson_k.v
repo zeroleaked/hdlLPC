@@ -1,4 +1,5 @@
 module levinson_k (
+        input   clk,
         input   wire [31:0] e, // 0,34
         input   wire signed [31:0] q, // 33
         output  wire signed [31:0] next_k // 31
@@ -9,8 +10,14 @@ module levinson_k (
 
     wire signed [31:0] div;
     wire signed [32:0] e_signed = {{1'b0}, e[31:0]};
-    wire signed [63:0] div1 = q_extend/e_signed;
-    assign div = div1[31:0]; // a * 2^(-33) / (b * 2^(-34)) = a/b * 2^(1) = a/b * 2^(32) * 2^(-31)
+    // wire signed [63:0] e_signed = {{32{1'b0}}, e[31:0]};
+
+    lpm_divide_var inst_levinson_div (
+        .clock(clk),
+        .numer(q_extend),
+        .denom(e_signed),
+        .quotient(div)
+    );
 
     assign next_k = -1 * div;
 
